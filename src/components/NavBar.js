@@ -7,7 +7,7 @@ export default function NavBar() {
     <>
       <nav className="nav-bar">
         <div className="nav-account">
-          <img src="" alt="profile image"></img>
+          <img src="images/profile.avif" alt="profile" id="profile"></img>
           <p>Aayush Koju</p>
         </div>
         <div className="nav-item">
@@ -16,23 +16,23 @@ export default function NavBar() {
             <p>Direction</p>
           </div>
           <div>
-            <img src="" alt="profile image"></img>
-            <p>Aayush Koju</p>
+            <img src="icons/favourite.png" alt="favourite"></img>
+            <p>Favourite</p>
           </div>
           <div>
-            <img src="" alt="profile image"></img>
-            <p>Aayush Koju</p>
+            <img src="icons/history.png" alt="history"></img>
+            <p>History</p>
           </div>
           <div>
-            <img src="" alt="profile image"></img>
-            <p>Aayush Koju</p>
+            <img src="icons/save.png" alt="save"></img>
+            <p>Saved</p>
           </div>
         </div>
         <div className="nav-icons">
           <div className="nav-icon">
-            <img src="" alt="icons"></img>
-            <img src="" alt="icons"></img>
-            <img src="" alt="icons"></img>
+            <img src="icons/notification.png" alt="notification"></img>
+            <img src="icons/message.png" alt="messages"></img>
+            <img src="icons/settings.png" alt="settings"></img>
           </div>
         </div>
       </nav>
