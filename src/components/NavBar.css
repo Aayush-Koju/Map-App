@@ -28,8 +28,8 @@
 .nav-item {
     display: flex;
     gap: 10%;
-    border-left: 1px solid #5b5b5b;
-    border-right: 1px solid #5b5b5b;
+    border-left: 2px solid #5b5b5b;
+    border-right: 2px solid #5b5b5b;
     width: 65%;
     justify-content: center;
 }
@@ -39,6 +39,16 @@
     flex-direction: row;
     align-items: center;
     gap: 5%;
+    padding: 0px 5px;
+    border-radius: 5px;
+    justify-content: center;
+    width: 110px;
+}
+
+.nav-item div:hover,
+.nav-item div:active{
+    background-color: #4a4a4a;
+    cursor: pointer;
 }
 
 .nav-icons {
