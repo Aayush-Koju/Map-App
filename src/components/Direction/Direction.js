@@ -1,29 +1,30 @@
 import React from "react";
 import "leaflet/dist/leaflet.css";
-import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "./Direction.css";
 import { Icon } from "leaflet";
+import MarkerClusterGroup from "react-leaflet-cluster";
 
 function Direction() {
   const markers = [
     {
       geocode: [48.86, 2.3522],
-      popup: "Hello, I am popup 1",
+      popUp: "Hello, I am popup 1",
     },
     {
       geocode: [48.85, 2.3522],
-      popup: "Hello, I am popup 2",
+      popUp: "Hello, I am popup 2",
     },
     {
       geocode: [48.855, 2.34],
-      popup: "Hello, I am popup 3",
+      popUp: "Hello, I am popup 3",
     },
   ];
 
   const customIcon = new Icon({
     // iconUrl: "https://cdn-icons-png.flaticon.com/512/684/684908.png",
-    iconUrl: require(`${process.env.PUBLIC_URL}/icons/marker.png`),
-    // iconSize: [38, 38], //size of the icon
+    iconUrl: `${process.env.PUBLIC_URL}/icons/marker.png`,
+    iconSize: [38, 38], //size of the icon
   });
 
   return (
@@ -32,9 +33,13 @@ function Direction() {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {markers.map((marker) => (
-        <Marker position={marker.geocode} icon={customIcon}></Marker>
-      ))}
+      <MarkerClusterGroup>
+        {markers.map((marker) => (
+          <Marker position={marker.geocode} icon={customIcon}>
+            <Popup>{marker.popUp}</Popup>
+          </Marker>
+        ))}
+      </MarkerClusterGroup>
     </MapContainer>
   );
 }
