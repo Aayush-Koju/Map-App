@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "./Direction.css";
 import { divIcon, Icon, point } from "leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import NewMarker from "../NewMarker/NewMarker";
+import Settings from "../Settings/Settings";
 
 function Direction() {
   // useEffect(() => {
@@ -17,6 +18,23 @@ function Direction() {
   //     }
   //   );
   // });
+
+  const [mapSkin, setMapSkin] = useState("standard");
+  const mapSkins = {
+    standard: {
+      url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+      attribution: "&copy; OpenStreetMap",
+    },
+    satellite: {
+      url: "https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.png",
+      attribution:
+        "&copy; CNES, Distribution Airbus DS, © Airbus DS, © PlanetObserver",
+    },
+    dark: {
+      url: "https://tiles.stadiamaps.com/tiles/stamen_toner_background/{z}/{x}/{y}{r}.png",
+      attribution: "&copy; Stadia Maps",
+    },
+  };
 
   const customIcon = new Icon({
     // iconUrl: "https://cdn-icons-png.flaticon.com/512/684/684908.png",
@@ -48,33 +66,36 @@ function Direction() {
   };
 
   return (
-    <MapContainer
-      tap={true}
-      center={[27.701, 85.323]}
-      zoom={13}
-      // minzoom={12}
-      maxZoom={18}
-    >
-      <TileLayer
-        attribution="&copy; CNES, Distribution Airbus DS, © Airbus DS, © PlanetObserver"
-        url="https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.png"
-        // url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <NewMarker customIcon={customIcon} />
-      <MarkerClusterGroup
-        chunkedLoading
-        iconCreateFunction={createCustomClusterIcon}
+    <>
+      <Settings setMapSkin={setMapSkin} />
+      {/* <Settings />  */}
+      <MapContainer
+        tap={true}
+        center={[27.701, 85.323]}
+        zoom={13}
+        // minzoom={12}
+        maxZoom={18}
       >
-        {
-          //predefined markers
-          markers.map((marker) => (
-            <Marker position={marker.geocode} icon={customIcon}>
-              <Popup>{marker.popUp}</Popup>
-            </Marker>
-          ))
-        }
-      </MarkerClusterGroup>
-    </MapContainer>
+        <TileLayer
+          attribution={mapSkins[mapSkin].attribution}
+          url={mapSkins[mapSkin].url}
+        />
+        <NewMarker customIcon={customIcon} />
+        <MarkerClusterGroup
+          chunkedLoading
+          iconCreateFunction={createCustomClusterIcon}
+        >
+          {
+            //predefined markers
+            markers.map((marker) => (
+              <Marker position={marker.geocode} icon={customIcon}>
+                <Popup>{marker.popUp}</Popup>
+              </Marker>
+            ))
+          }
+        </MarkerClusterGroup>
+      </MapContainer>
+    </>
   );
 }
 

@@ -1,6 +1,7 @@
 import "./App.css";
 import Direction from "./components/Direction/Direction";
 import NavBar from "./components/NavBar/NavBar";
+import Settings from "./components/Settings/Settings";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <NavBar />
       Map Application
       <Direction />
+      {/* <Settings /> */}
     </div>
   );
 }
