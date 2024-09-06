@@ -4,8 +4,26 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "./Direction.css";
 import { divIcon, Icon, point } from "leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
+import NewMarker from "../NewMarker/NewMarker";
 
 function Direction() {
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition(
+  //     (position) => {
+  //       const { latitude, longitude } = position.coords;
+  //     },
+  //     (error) => {
+  //       console.error("Error getting geolocation:", error);
+  //     }
+  //   );
+  // });
+
+  const customIcon = new Icon({
+    // iconUrl: "https://cdn-icons-png.flaticon.com/512/684/684908.png",
+    iconUrl: `${process.env.PUBLIC_URL}/icons/marker.png`,
+    iconSize: [38, 38], //size of the icon
+  });
+
   const markers = [
     {
       geocode: [48.86, 2.3522],
@@ -21,12 +39,6 @@ function Direction() {
     },
   ];
 
-  const customIcon = new Icon({
-    // iconUrl: "https://cdn-icons-png.flaticon.com/512/684/684908.png",
-    iconUrl: `${process.env.PUBLIC_URL}/icons/marker.png`,
-    iconSize: [38, 38], //size of the icon
-  });
-
   const createCustomClusterIcon = (cluster) => {
     return new divIcon({
       html: `<div class="cluster-icon">${cluster.getChildCount()}</div>`,
@@ -36,32 +48,31 @@ function Direction() {
   };
 
   return (
-    <MapContainer center={[48.8566, 2.3522]} zoom={13}>
-      {/* <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-      /> */}
-
-      {/* <TileLayer
-        attribution='<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> 
-        | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
-      /> */}
-
+    <MapContainer
+      tap={true}
+      center={[27.701, 85.323]}
+      zoom={13}
+      // minzoom={12}
+      maxZoom={18}
+    >
       <TileLayer
         attribution="&copy; CNES, Distribution Airbus DS, © Airbus DS, © PlanetObserver"
         url="https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.png"
+        // url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-
+      <NewMarker customIcon={customIcon} />
       <MarkerClusterGroup
         chunkedLoading
         iconCreateFunction={createCustomClusterIcon}
       >
-        {markers.map((marker) => (
-          <Marker position={marker.geocode} icon={customIcon}>
-            <Popup>{marker.popUp}</Popup>
-          </Marker>
-        ))}
+        {
+          //predefined markers
+          markers.map((marker) => (
+            <Marker position={marker.geocode} icon={customIcon}>
+              <Popup>{marker.popUp}</Popup>
+            </Marker>
+          ))
+        }
       </MarkerClusterGroup>
     </MapContainer>
   );
