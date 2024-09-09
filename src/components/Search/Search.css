@@ -1,0 +1,27 @@
+.search-container{
+    display: flex;
+    gap: 10px;
+}
+
+.search {
+    display: flex;
+    background-color: #fff;
+    padding: 5px;
+    width: 18rem;
+    border-radius: 10px;
+    justify-content: space-evenly;
+}
+
+.search input {
+    border-radius: 10px;
+    height: 1.5rem;
+    width: 13rem;
+    padding: 2px 5px;
+    font-size: 1.1rem;
+    border: none;
+}
+
+.search img {
+    border-radius: 10px;
+    border: none;
+}

@@ -13,7 +13,7 @@ function NewMarker({ customIcon }) {
         reverseLocation.city_district,
         reverseLocation.city,
         reverseLocation.municipality,
-        reverseLocation.county
+        reverseLocation.country
       );
     }
   }, [reverseLocation]);
@@ -29,13 +29,14 @@ function NewMarker({ customIcon }) {
         .then((response) => {
           const { address } = response.data;
 
-          const { suburb, city_district, city, municipality, county } = address;
+          const { suburb, city_district, city, municipality, country } =
+            address;
           setReverseLocation({
             suburb,
             city_district,
             city,
             municipality,
-            county,
+            country,
           });
         })
         .catch((error) => {

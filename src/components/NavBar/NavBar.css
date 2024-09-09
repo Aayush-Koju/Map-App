@@ -51,16 +51,11 @@
     cursor: pointer;
 }
 
-.nav-icons {
+.search-bar {
     display: flex;
-    justify-content: flex-end;
-    width:20%;
-}
-
-.nav-icon {
-    display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 10px;
+    width:20%;
     background-color: #494949;
     padding: 0px 20px;
     border-radius: 5px;

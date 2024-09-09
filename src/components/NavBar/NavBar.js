@@ -1,6 +1,7 @@
 import React from "react";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import "./NavBar.css";
+import Search from "../Search/Search";
 
 export default function NavBar() {
   return (
@@ -28,12 +29,8 @@ export default function NavBar() {
             <p>Saved</p>
           </div>
         </div>
-        <div className="nav-icons">
-          <div className="nav-icon">
-            <img src="icons/notification.png" alt="notification"></img>
-            <img src="icons/message.png" alt="messages"></img>
-            <img src="icons/settings.png" alt="settings"></img>
-          </div>
+        <div className="search-bar">
+          <Search />
         </div>
       </nav>
     </>
