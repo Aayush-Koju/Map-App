@@ -77,7 +77,7 @@ function Direction() {
         zoom={13}
         // minzoom={12}
         maxZoom={18}
-        bounds={result}
+        // bounds={result}
       >
         <TileLayer
           attribution={mapSkins[mapSkin].attribution}
