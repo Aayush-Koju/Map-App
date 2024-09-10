@@ -2,6 +2,7 @@ import React from "react";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import "./NavBar.css";
 import Search from "../Search/Search";
+import Settings from "../Settings/Settings";
 
 export default function NavBar() {
   return (
@@ -20,14 +21,7 @@ export default function NavBar() {
             <img src="icons/favourite.png" alt="favourite"></img>
             <p>Favourite</p>
           </div>
-          <div>
-            <img src="icons/history.png" alt="history"></img>
-            <p>History</p>
-          </div>
-          <div>
-            <img src="icons/save.png" alt="save"></img>
-            <p>Saved</p>
-          </div>
+          <Settings />
         </div>
         <div className="search-bar">
           <Search />

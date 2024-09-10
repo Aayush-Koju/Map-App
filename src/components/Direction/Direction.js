@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "./Direction.css";
@@ -6,6 +6,7 @@ import { divIcon, Icon, point } from "leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import NewMarker from "../NewMarker/NewMarker";
 import Settings from "../Settings/Settings";
+import { MyContext } from "../../Context/MyContext";
 
 function Direction() {
   // useEffect(() => {
@@ -19,7 +20,8 @@ function Direction() {
   //   );
   // });
 
-  const [mapSkin, setMapSkin] = useState("standard");
+  const { result, mapSkin } = useContext(MyContext);
+
   const mapSkins = {
     standard: {
       url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -65,16 +67,17 @@ function Direction() {
     });
   };
 
+  console.log("direction result", result);
+
   return (
     <>
-      <Settings setMapSkin={setMapSkin} />
-      {/* <Settings />  */}
       <MapContainer
         tap={true}
         center={[27.701, 85.323]}
         zoom={13}
         // minzoom={12}
         maxZoom={18}
+        bounds={result}
       >
         <TileLayer
           attribution={mapSkins[mapSkin].attribution}
