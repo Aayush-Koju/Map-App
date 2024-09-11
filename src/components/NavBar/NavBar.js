@@ -14,15 +14,16 @@ export default function NavBar() {
           <p>Aayush Koju</p>
         </div>
         <div className="nav-item">
-          <div>
+          <div className="nav-item-content">
             <img src="icons/direction.png" alt="direction"></img>
             <p>Direction</p>
           </div>
-          <div>
+          <div className="nav-item-content">
             <Geocoding />
-            <p>Favourite</p>
           </div>
-          <Settings />
+          <div className="nav-item-content">
+            <Settings />
+          </div>
         </div>
         <div className="search-bar">
           <Search />

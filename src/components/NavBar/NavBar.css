@@ -34,7 +34,7 @@
     justify-content: center;
 }
 
-.nav-item div{
+.nav-item-content{
     display: flex;
     flex-direction: row;
     align-items: center;

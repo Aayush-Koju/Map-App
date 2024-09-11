@@ -1,0 +1,9 @@
+.geocoding {
+    display: flex;
+    flex-direction: column;
+}
+
+.geocoding div {
+    display: flex;
+    gap: 10px;
+}
