@@ -3,6 +3,7 @@ import React from "react";
 import "./NavBar.css";
 import Search from "../Search/Search";
 import Settings from "../Settings/Settings";
+import Geocoding from "../GeoCoding/Geocoding";
 
 export default function NavBar() {
   return (
@@ -18,7 +19,7 @@ export default function NavBar() {
             <p>Direction</p>
           </div>
           <div>
-            <img src="icons/favourite.png" alt="favourite"></img>
+            <Geocoding />
             <p>Favourite</p>
           </div>
           <Settings />

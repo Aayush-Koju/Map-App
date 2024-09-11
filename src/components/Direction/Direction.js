@@ -1,12 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "leaflet/dist/leaflet.css";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "./Direction.css";
 import { divIcon, Icon, point } from "leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import NewMarker from "../NewMarker/NewMarker";
-import Settings from "../Settings/Settings";
 import { MyContext } from "../../Context/MyContext";
+import ChangeMapView from "../ChangeMapView/ChangeMapView";
 
 function Direction() {
   // useEffect(() => {
@@ -20,7 +20,7 @@ function Direction() {
   //   );
   // });
 
-  const { result, mapSkin } = useContext(MyContext);
+  const { mapSkin, latitude, longitude } = useContext(MyContext);
 
   const mapSkins = {
     standard: {
@@ -67,8 +67,6 @@ function Direction() {
     });
   };
 
-  console.log("direction result", result);
-
   return (
     <>
       <MapContainer
@@ -83,6 +81,7 @@ function Direction() {
           attribution={mapSkins[mapSkin].attribution}
           url={mapSkins[mapSkin].url}
         />
+        <ChangeMapView center={[latitude, longitude]} zoom={13} />
         <NewMarker customIcon={customIcon} />
         <MarkerClusterGroup
           chunkedLoading

@@ -65,8 +65,8 @@ function Search() {
           autoComplete.map((item, index) => (
             <div key={index} className="dropdown-row">
               {item.display_name}
-              {/* {item.lat} */}
-              {/* {item.lon} */}
+              {item.lat}
+              {item.lon}
             </div>
           ))}
       </div>

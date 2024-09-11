@@ -49,6 +49,7 @@ function NewMarker({ customIcon }) {
   const map = useMapEvents({
     click(e) {
       setClickedLocation([e.latlng.lat, e.latlng.lng]);
+      console.log([e.latlng.lat, e.latlng.lng]);
     },
   });
 
