@@ -5,7 +5,7 @@ import { MyContext } from "../../Context/MyContext";
 
 function Search() {
   const [search, setSearch] = useState("");
-  const [autocomplete, setAutocomplete] = useState([]);
+  const [autoComplete, setAutoComplete] = useState([]);
   const { result, setResult } = useContext(MyContext);
 
   useEffect(() => {
@@ -15,16 +15,15 @@ function Search() {
       .get(`https://nominatim.openstreetmap.org/search?q=${search}&format=json`)
       .then((response) => {
         if (response.data.length > 0) {
-          let overallAutocompleteDatas = [];
-          let result = response.data;
-          for (let i = 0; i < result.length; i++) {
-            const { display_name, lat, lon } = result[i];
-            setAutocomplete({
-              display_name,
-              lat,
-              lon,
-            });
-          }
+          // let overallAutocompleteDatas = [];
+          let responseData = response.data;
+          console.log(responseData); //checking the data got from api
+
+          let suggestions = responseData.map((item) => {
+            const { display_name, lat, lon } = item;
+            return { display_name, lat, lon };
+          });
+          setAutoComplete(suggestions);
 
           // const bounds = response.data[0].boundingbox;
           // console.log("bounds", bounds);
@@ -37,7 +36,18 @@ function Search() {
         }
       })
       .catch((error) => console.log(error));
-  }, [search, setResult]);
+  }, [search, autoComplete]);
+
+  useEffect(() => console.log(autoComplete.length), [autoComplete]);
+
+  const handleAutoCompleteClick = (item) => {
+    // setSearch(item.display_name);
+    setResult([
+      [parseFloat(item.lat) - 0.01, parseFloat(item.lon) - 0.01],
+      [parseFloat(item.lat) + 0.01, parseFloat(item.lon) + 0.01],
+    ]);
+    setAutoComplete([]);
+  };
 
   return (
     <div className="search-container">
@@ -50,19 +60,16 @@ function Search() {
         />
         <img src="icons/search.png" alt="search icon" />
       </div>
-      {result?.length > 0 && (
-        <div
-          style={{
-            height: 1000,
-            widows: 300,
-            background: "red",
-            position: "absolute",
-          }}
-        >
-          This is the content
-        </div>
-      )}
-      {/* <div></div> */}
+      <div className="dropdown">
+        {Array.isArray(autoComplete) &&
+          autoComplete.map((item, index) => (
+            <div key={index} className="dropdown-row">
+              {item.display_name}
+              {/* {item.lat} */}
+              {/* {item.lon} */}
+            </div>
+          ))}
+      </div>
     </div>
   );
 }
