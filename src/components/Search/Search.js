@@ -6,7 +6,7 @@ import { MyContext } from "../../Context/MyContext";
 function Search() {
   const [search, setSearch] = useState("");
   const [autoComplete, setAutoComplete] = useState([]);
-  const { setResult } = useContext(MyContext);
+  const { result, setResult } = useContext(MyContext);
 
   useEffect(() => {
     if (search.trim() === "") return; //no request when search is null
@@ -37,17 +37,23 @@ function Search() {
         }
       })
       .catch((error) => console.log(error));
-  }, [search]);
+  }, [search, setResult]);
 
   useEffect(() => console.log(autoComplete.length), [autoComplete]);
 
-  const handleAutoCompleteClick = (item) => {
-    // setSearch(item.display_name);
+  const handleSuggestionClick = (index) => {
+    //fix this fuction
+    setSearch(autoComplete[index].display_name);
     setResult([
-      [parseFloat(item.lat) - 0.01, parseFloat(item.lon) - 0.01],
-      [parseFloat(item.lat) + 0.01, parseFloat(item.lon) + 0.01],
+      [
+        parseFloat(autoComplete.boundingbox[0]),
+        parseFloat(autoComplete.boundingbox[2]),
+      ], //south west
+      [
+        parseFloat(autoComplete.boundingbox[1]),
+        parseFloat(autoComplete.boundingbox[3]),
+      ], //north east
     ]);
-    setAutoComplete([]);
   };
 
   return (
@@ -67,12 +73,14 @@ function Search() {
       >
         {Array.isArray(autoComplete) &&
           autoComplete.map((item, index) => (
-            <div key={index} className="dropdown-row">
-              <span>
-                {item.display_name}
-                {item.lat}
-                {item.lon}
-              </span>
+            <div
+              key={index}
+              className="dropdown-row"
+              onClick={() => handleSuggestionClick(index)}
+            >
+              {item.display_name}
+              {/* {item.lat}
+                {item.lon} */}
             </div>
           ))}
       </div>
