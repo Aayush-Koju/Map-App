@@ -18,7 +18,7 @@ export default function NavBar() {
             <img src="icons/direction.png" alt="direction"></img>
             <p>Direction</p>
           </div>
-          <div className="nav-item-content">
+          <div className="nav-item-content" id="geocoding">
             <Geocoding />
           </div>
           <div className="nav-item-content">

@@ -27,7 +27,6 @@
 
 .nav-item {
     display: flex;
-    gap: 10%;
     border-left: 2px solid #5b5b5b;
     border-right: 2px solid #5b5b5b;
     width: 65%;
@@ -39,17 +38,22 @@
     flex-direction: row;
     align-items: center;
     gap: 5%;
-    padding: 0px 5px;
     border-radius: 5px;
     justify-content: center;
     width: 110px;
-    margin: 0rem 3rem;
+    padding: 0px 10px;
 }
 
 .nav-item-content:hover,
 .nav-item-content :active{
     background-color: #4a4a4a;
     cursor: pointer;
+}
+
+#geocoding {
+    width: 30rem;
+    margin: 0px;
+    padding: 0px 10px;
 }
 
 .search-bar {

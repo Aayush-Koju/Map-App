@@ -81,7 +81,7 @@ function Direction() {
           attribution={mapSkins[mapSkin].attribution}
           url={mapSkins[mapSkin].url}
         />
-        <ChangeMapView center={[latitude, longitude]} zoom={4} />
+        <ChangeMapView center={[latitude, longitude]} zoom={13} />
         <NewMarker customIcon={customIcon} />
         <MarkerClusterGroup
           chunkedLoading
