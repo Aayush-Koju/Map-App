@@ -43,10 +43,11 @@
     border-radius: 5px;
     justify-content: center;
     width: 110px;
+    margin: 0rem 3rem;
 }
 
-.nav-item div:hover,
-.nav-item div:active{
+.nav-item-content:hover,
+.nav-item-content :active{
     background-color: #4a4a4a;
     cursor: pointer;
 }

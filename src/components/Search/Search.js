@@ -6,7 +6,7 @@ import { MyContext } from "../../Context/MyContext";
 function Search() {
   const [search, setSearch] = useState("");
   const [autoComplete, setAutoComplete] = useState([]);
-  const { result, setResult } = useContext(MyContext);
+  const { setResult } = useContext(MyContext);
 
   useEffect(() => {
     if (search.trim() === "") return; //no request when search is null
@@ -20,23 +20,24 @@ function Search() {
           console.log(responseData); //checking the data got from api
 
           let suggestions = responseData.map((item) => {
-            const { display_name, lat, lon } = item;
-            return { display_name, lat, lon };
+            const { display_name, lat, lon, boundingbox } = item;
+            return { display_name, lat, lon, boundingbox };
           });
           setAutoComplete(suggestions);
-
-          // const bounds = response.data[0].boundingbox;
-          // console.log("bounds", bounds);
-          // console.log(result);
-          // setResult([
-          //   [parseFloat(bounds[0]), parseFloat(bounds[2])], //south west
-          //   [parseFloat(bounds[1]), parseFloat(bounds[3])], //north east
-          // ]);
-          // console.log("result", result);
+          setResult([
+            [
+              parseFloat(suggestions.boundingbox[0]),
+              parseFloat(suggestions.boundingbox[2]),
+            ], //south west
+            [
+              parseFloat(suggestions.boundingbox[1]),
+              parseFloat(suggestions.boundingbox[3]),
+            ], //north east
+          ]);
         }
       })
       .catch((error) => console.log(error));
-  }, [search, autoComplete]);
+  }, [search]);
 
   useEffect(() => console.log(autoComplete.length), [autoComplete]);
 
@@ -60,13 +61,18 @@ function Search() {
         />
         <img src="icons/search.png" alt="search icon" />
       </div>
-      <div className="dropdown">
+      <div
+        className="dropdown"
+        style={{ display: "flex", textDecorationColor: "GrayText" }}
+      >
         {Array.isArray(autoComplete) &&
           autoComplete.map((item, index) => (
             <div key={index} className="dropdown-row">
-              {item.display_name}
-              {item.lat}
-              {item.lon}
+              <span>
+                {item.display_name}
+                {item.lat}
+                {item.lon}
+              </span>
             </div>
           ))}
       </div>
