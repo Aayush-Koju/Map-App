@@ -89,8 +89,8 @@ function Direction() {
         >
           {
             //predefined markers
-            markers.map((marker) => (
-              <Marker position={marker.geocode} icon={customIcon}>
+            markers.map((marker, index) => (
+              <Marker key={index} position={marker.geocode} icon={customIcon}>
                 <Popup>{marker.popUp}</Popup>
               </Marker>
             ))

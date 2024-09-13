@@ -42,18 +42,21 @@ function Search() {
   useEffect(() => console.log(autoComplete.length), [autoComplete]);
 
   const handleSuggestionClick = (index) => {
-    //fix this fuction
-    setSearch(autoComplete[index].display_name);
-    setResult([
-      [
-        parseFloat(autoComplete.boundingbox[0]),
-        parseFloat(autoComplete.boundingbox[2]),
-      ], //south west
-      [
-        parseFloat(autoComplete.boundingbox[1]),
-        parseFloat(autoComplete.boundingbox[3]),
-      ], //north east
-    ]);
+    const selectedSuggestion = autoComplete[index];
+
+    if (selectedSuggestion && selectedSuggestion.boundingbox) {
+      setSearch(selectedSuggestion.display_name);
+      setResult([
+        [
+          parseFloat(selectedSuggestion.boundingbox[0]),
+          parseFloat(selectedSuggestion.boundingbox[2]),
+        ], //south west
+        [
+          parseFloat(selectedSuggestion.boundingbox[1]),
+          parseFloat(selectedSuggestion.boundingbox[3]),
+        ], //north east
+      ]);
+    }
   };
 
   return (

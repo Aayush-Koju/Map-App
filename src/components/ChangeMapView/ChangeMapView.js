@@ -7,6 +7,7 @@ function ChangeMapView({ center, zoom }) {
   const { result } = useContext(MyContext);
 
   useEffect(() => {
+    console.log("Bounding box result:", result);
     if (result) {
       map.fitBounds(result); //bounding box
     } else if (center) {
