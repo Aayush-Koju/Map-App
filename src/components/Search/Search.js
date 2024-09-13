@@ -6,7 +6,8 @@ import { MyContext } from "../../Context/MyContext";
 function Search() {
   const [search, setSearch] = useState("");
   const [autoComplete, setAutoComplete] = useState([]);
-  const { result, setResult } = useContext(MyContext);
+  const { result, setResult, setLatitude, setLongitude } =
+    useContext(MyContext);
 
   useEffect(() => {
     if (search.trim() === "") return; //no request when search is null
@@ -24,20 +25,10 @@ function Search() {
             return { display_name, lat, lon, boundingbox };
           });
           setAutoComplete(suggestions);
-          setResult([
-            [
-              parseFloat(suggestions.boundingbox[0]),
-              parseFloat(suggestions.boundingbox[2]),
-            ], //south west
-            [
-              parseFloat(suggestions.boundingbox[1]),
-              parseFloat(suggestions.boundingbox[3]),
-            ], //north east
-          ]);
         }
       })
       .catch((error) => console.log(error));
-  }, [search, setResult]);
+  }, [search]);
 
   useEffect(() => console.log(autoComplete.length), [autoComplete]);
 
@@ -56,6 +47,8 @@ function Search() {
           parseFloat(selectedSuggestion.boundingbox[3]),
         ], //north east
       ]);
+      setLatitude(selectedSuggestion.lat);
+      setLongitude(selectedSuggestion.lon);
     }
   };
 
@@ -72,7 +65,7 @@ function Search() {
       </div>
       <div
         className="dropdown"
-        style={{ display: "flex", textDecorationColor: "GrayText" }}
+        // style={{ display: "flex", textDecorationColor: "GrayText" }}
       >
         {Array.isArray(autoComplete) &&
           autoComplete.map((item, index) => (

@@ -1,10 +1,14 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Marker, useMapEvents } from "react-leaflet";
+import { MyContext } from "../../Context/MyContext";
 
 function NewMarker({ customIcon }) {
   const [clickedLocation, setClickedLocation] = useState([]);
   const [reverseLocation, setReverseLocation] = useState(null);
+  const { latitude, longitude } = useContext(MyContext);
+
+  const center = latitude && longitude ? [latitude, longitude] : null;
 
   useEffect(() => {
     if (reverseLocation) {
@@ -54,12 +58,20 @@ function NewMarker({ customIcon }) {
   });
 
   return clickedLocation.length > 0 ? (
-    <Marker
-      key={clickedLocation[0]}
-      position={clickedLocation}
-      interactive={false}
-      icon={customIcon}
-    />
+    <div>
+      <Marker
+        key={clickedLocation[0]}
+        position={clickedLocation}
+        interactive={false}
+        icon={customIcon}
+      />
+      <Marker //new one for searched map
+        key={center[0]}
+        position={center}
+        interactive={false}
+        icon={customIcon}
+      />
+    </div>
   ) : null;
 }
 
