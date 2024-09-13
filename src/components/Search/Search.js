@@ -60,6 +60,7 @@ function Search() {
           placeholder="search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          onMouseEnter={(e) => setSearch(e.target.value)}
         />
         <img src="icons/search.png" alt="search icon" />
       </div>

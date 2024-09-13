@@ -1,8 +1,7 @@
 import "./App.css";
 import Direction from "./components/Direction/Direction";
+import Home from "./components/Home/Home";
 import NavBar from "./components/NavBar/NavBar";
-import Search from "./components/Search/Search";
-import Settings from "./components/Settings/Settings";
 import { ContextProvider } from "./Context/MyContext";
 
 function App() {
@@ -11,6 +10,7 @@ function App() {
       <div className="App">
         <NavBar />
         Map Application
+        {/* <Home /> */}
         <Direction />
       </div>
     </ContextProvider>
