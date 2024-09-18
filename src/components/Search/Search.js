@@ -64,12 +64,13 @@ function Search() {
         />
         <img src="icons/search.png" alt="search icon" />
       </div>
-      <div
-        className="dropdown"
-        // style={{ display: "flex", textDecorationColor: "GrayText" }}
-      >
-        {Array.isArray(autoComplete) &&
-          autoComplete.map((item, index) => (
+      {/* {Array.isArray(autoComplete) && ( */}
+      {autoComplete.length > 3 && (
+        <div
+          className="dropdown"
+          // style={{ display: "flex", textDecorationColor: "GrayText" }}
+        >
+          {autoComplete.map((item, index) => (
             <div
               key={index}
               className="dropdown-row"
@@ -80,7 +81,8 @@ function Search() {
                 {item.lon} */}
             </div>
           ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

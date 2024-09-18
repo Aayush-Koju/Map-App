@@ -14,3 +14,8 @@
     font-weight: 900;
     font-size: 1.5rem;
 }
+
+.direction {
+    /* display: flex; */
+    height: 100vh;
+}
