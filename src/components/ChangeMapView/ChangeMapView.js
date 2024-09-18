@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { useMap } from "react-leaflet";
+import { Rectangle, useMap } from "react-leaflet";
 import { MyContext } from "../../Context/MyContext";
 
 function ChangeMapView({ center, zoom }) {
@@ -8,6 +8,7 @@ function ChangeMapView({ center, zoom }) {
 
   useEffect(() => {
     console.log("Bounding box result:", result);
+
     if (result) {
       map.fitBounds(result, zoom); // setting map view
     } else if (center) {

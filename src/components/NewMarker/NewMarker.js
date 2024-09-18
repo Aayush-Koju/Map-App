@@ -57,22 +57,28 @@ function NewMarker({ customIcon }) {
     },
   });
 
-  return clickedLocation.length > 0 ? (
+  const clearMarker = () => {
+    setClickedLocation([]);
+  };
+
+  return (
     <div>
-      <Marker
-        key={clickedLocation[0]}
-        position={clickedLocation}
-        interactive={false}
-        icon={customIcon}
-      />
-      <Marker //new one for searched map
-        key={center[0]}
+      <Marker //new one for searched map or default
+        key={center[0]} //loads even if marker is not added manually
         position={center}
         interactive={false}
         icon={customIcon}
       />
+      {clickedLocation.length > 0 ? (
+        <Marker
+          key={clickedLocation[0]}
+          position={clickedLocation}
+          interactive={false}
+          icon={customIcon}
+        />
+      ) : null}
     </div>
-  ) : null;
+  );
 }
 
 export default NewMarker;
