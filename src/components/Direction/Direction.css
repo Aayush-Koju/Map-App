@@ -1,5 +1,7 @@
 .leaflet-container {
-    height: 89vh;
+    /* height: 89vh; */
+    height: 100%;
+    width: 100%;
 }
 
 .cluster-icon {
@@ -16,6 +18,14 @@
 }
 
 .direction {
-    /* display: flex; */
+    display: flex;
     height: 100vh;
+}
+
+.direction-side {
+    width: 300px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
