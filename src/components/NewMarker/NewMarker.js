@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Marker, useMapEvents } from "react-leaflet";
 import { MyContext } from "../../Context/MyContext";
+import "./NewMarker.css";
 
 function NewMarker({ customIcon }) {
   const [clickedLocation, setClickedLocation] = useState([]);
@@ -59,6 +60,7 @@ function NewMarker({ customIcon }) {
 
   const clearMarker = () => {
     setClickedLocation([]);
+    setReverseLocation([]);
   };
 
   return (
@@ -77,6 +79,12 @@ function NewMarker({ customIcon }) {
           icon={customIcon}
         />
       ) : null}
+
+      {clickedLocation.length > 0 && (
+        <button onClick={clearMarker} className="clear-marker">
+          Remove Marker
+        </button>
+      )}
     </div>
   );
 }
