@@ -52,6 +52,7 @@ function Direction() {
         <input type="text"></input>
         <label>Stop destination</label>
         <input type="text"></input>
+        <button>Search</button>
       </div>
     </div>
   );
