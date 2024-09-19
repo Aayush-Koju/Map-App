@@ -13,4 +13,5 @@
 
 .geocoding input {
     height: 20px;
+    outline: none;
 }

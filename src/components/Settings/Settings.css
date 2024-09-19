@@ -6,4 +6,5 @@
 
 .settings select {
     height: 20px;
+    outline: none;
 }
